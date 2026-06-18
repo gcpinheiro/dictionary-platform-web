@@ -27,7 +27,17 @@ export async function getDictionaryWords(
   page: number,
   perPage: number,
 ): Promise<PaginatedResponse<WordDetail>> {
-  return request<PaginatedResponse<WordDetail>>(
+  const response = await request<PaginatedResponse<WordDetail> | WordDetail[]>(
     `/words?_page=${page}&_per_page=${perPage}`,
   );
+
+  if (Array.isArray(response)) {
+    return {
+      data: response,
+      items: response.length,
+      pages: response.length ? page : Math.max(page - 1, 1),
+    };
+  }
+
+  return response;
 }
