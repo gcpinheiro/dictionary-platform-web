@@ -1,0 +1,241 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Gabriel Pinheiro",
+      "email": "gabriel@example.com",
+      "password": "123456"
+    }
+  ],
+  "words": [
+    {
+      "id": "energy",
+      "word": "energy",
+      "phonetic": "/ˈenərdʒi/",
+      "meanings": [
+        {
+          "partOfSpeech": "noun",
+          "definitions": [
+            {
+              "definition": "The strength and vitality required for sustained physical or mental activity.",
+              "example": "The team had enough energy to finish the project."
+            },
+            {
+              "definition": "Power derived from physical or chemical resources.",
+              "example": "Solar energy can reduce electricity costs."
+            }
+          ],
+          "synonyms": ["power", "force", "vitality"]
+        }
+      ]
+    },
+    {
+      "id": "solar",
+      "word": "solar",
+      "phonetic": "/ˈsoʊlər/",
+      "meanings": [
+        {
+          "partOfSpeech": "adjective",
+          "definitions": [
+            {
+              "definition": "Relating to or determined by the sun.",
+              "example": "The company installed solar panels on the roof."
+            }
+          ],
+          "synonyms": ["sun-powered", "heliacal"]
+        }
+      ]
+    },
+    {
+      "id": "grid",
+      "word": "grid",
+      "phonetic": "/ɡrɪd/",
+      "meanings": [
+        {
+          "partOfSpeech": "noun",
+          "definitions": [
+            {
+              "definition": "A network of lines that cross each other to form squares.",
+              "example": "The map uses a grid to locate each building."
+            },
+            {
+              "definition": "A network for distributing electricity.",
+              "example": "The city depends on a reliable power grid."
+            }
+          ],
+          "synonyms": ["network", "matrix", "mesh"]
+        }
+      ]
+    },
+    {
+      "id": "meter",
+      "word": "meter",
+      "phonetic": "/ˈmiːtər/",
+      "meanings": [
+        {
+          "partOfSpeech": "noun",
+          "definitions": [
+            {
+              "definition": "A device that measures and records a quantity.",
+              "example": "The smart meter reports consumption every hour."
+            }
+          ],
+          "synonyms": ["gauge", "measure", "indicator"]
+        }
+      ]
+    },
+    {
+      "id": "power",
+      "word": "power",
+      "phonetic": "/ˈpaʊər/",
+      "meanings": [
+        {
+          "partOfSpeech": "noun",
+          "definitions": [
+            {
+              "definition": "The ability or capacity to do something or act in a particular way.",
+              "example": "The battery stores enough power for the evening."
+            }
+          ],
+          "synonyms": ["capacity", "strength", "energy"]
+        }
+      ]
+    },
+    {
+      "id": "renewable",
+      "word": "renewable",
+      "phonetic": "/rɪˈnuːəbəl/",
+      "meanings": [
+        {
+          "partOfSpeech": "adjective",
+          "definitions": [
+            {
+              "definition": "Capable of being replenished naturally over time.",
+              "example": "Wind and solar are renewable energy sources."
+            }
+          ],
+          "synonyms": ["sustainable", "replenishable"]
+        }
+      ]
+    },
+    {
+      "id": "battery",
+      "word": "battery",
+      "phonetic": "/ˈbætəri/",
+      "meanings": [
+        {
+          "partOfSpeech": "noun",
+          "definitions": [
+            {
+              "definition": "A device that stores chemical energy and converts it into electricity.",
+              "example": "The battery supports the system during peak demand."
+            }
+          ],
+          "synonyms": ["cell", "accumulator"]
+        }
+      ]
+    },
+    {
+      "id": "charge",
+      "word": "charge",
+      "phonetic": "/tʃɑːrdʒ/",
+      "meanings": [
+        {
+          "partOfSpeech": "verb",
+          "definitions": [
+            {
+              "definition": "To store electrical energy in a device.",
+              "example": "The vehicle can charge overnight."
+            }
+          ],
+          "synonyms": ["load", "energize"]
+        }
+      ]
+    },
+    {
+      "id": "plant",
+      "word": "plant",
+      "phonetic": "/plænt/",
+      "meanings": [
+        {
+          "partOfSpeech": "noun",
+          "definitions": [
+            {
+              "definition": "An industrial site where power is produced.",
+              "example": "The plant supplies energy to thousands of homes."
+            }
+          ],
+          "synonyms": ["facility", "station", "works"]
+        }
+      ]
+    },
+    {
+      "id": "storage",
+      "word": "storage",
+      "phonetic": "/ˈstɔːrɪdʒ/",
+      "meanings": [
+        {
+          "partOfSpeech": "noun",
+          "definitions": [
+            {
+              "definition": "The action or method of keeping something for future use.",
+              "example": "Energy storage helps balance supply and demand."
+            }
+          ],
+          "synonyms": ["retention", "reserve", "stockpile"]
+        }
+      ]
+    },
+    {
+      "id": "voltage",
+      "word": "voltage",
+      "phonetic": "/ˈvoʊltɪdʒ/",
+      "meanings": [
+        {
+          "partOfSpeech": "noun",
+          "definitions": [
+            {
+              "definition": "An electrical force that makes current flow through a circuit.",
+              "example": "The technician checked the voltage before reconnecting the equipment."
+            }
+          ],
+          "synonyms": ["electric potential"]
+        }
+      ]
+    },
+    {
+      "id": "current",
+      "word": "current",
+      "phonetic": "/ˈkʌrənt/",
+      "meanings": [
+        {
+          "partOfSpeech": "noun",
+          "definitions": [
+            {
+              "definition": "A flow of electric charge.",
+              "example": "The sensor measures current in real time."
+            }
+          ],
+          "synonyms": ["flow", "stream"]
+        }
+      ]
+    }
+  ],
+  "favorites": [
+    {
+      "id": "1",
+      "userId": "1",
+      "wordId": "energy",
+      "word": "energy"
+    }
+  ],
+  "history": [
+    {
+      "id": "1",
+      "userId": "1",
+      "word": "energy",
+      "createdAt": "2026-06-17T12:00:00.000Z"
+    }
+  ]
+}
+
