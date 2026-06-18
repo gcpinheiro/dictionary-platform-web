@@ -3,6 +3,7 @@
 import { X } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import { WordDetailsSkeleton } from "@/components/ui/Skeletons";
+import { PronunciationButton } from "@/components/words/PronunciationButton";
 import { getWordDetails } from "@/services/words.service";
 import type { WordDetail } from "@/types/word";
 
@@ -70,6 +71,9 @@ export function ModalDetalhesPalavra({
             >
               {word}
             </h2>
+            <div className="mt-4">
+              <PronunciationButton word={word} />
+            </div>
           </div>
           <button
             aria-label="Fechar modal"

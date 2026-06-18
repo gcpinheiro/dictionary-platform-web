@@ -3,6 +3,7 @@ import { AppHeader } from "@/components/layout/AppHeader";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import type { WordDetail } from "@/types/word";
 import { FavoriteButton } from "./FavoriteButton";
+import { PronunciationButton } from "./PronunciationButton";
 
 interface WordDetailsProps {
   word: WordDetail | null;
@@ -82,7 +83,10 @@ export function WordDetails({
                   </p>
                 ) : null}
               </div>
-              <FavoriteButton word={word.word} wordId={word.id} />
+              <div className="flex flex-col gap-3 sm:items-end">
+                <PronunciationButton word={word.word} />
+                <FavoriteButton word={word.word} wordId={word.id} />
+              </div>
             </div>
           </header>
 
