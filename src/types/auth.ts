@@ -2,13 +2,14 @@ export interface AuthUser {
   id: string;
   name: string;
   email: string;
+}
+
+export interface UserRecord extends AuthUser {
   password: string;
 }
 
 export interface AuthSession {
-  userId: string;
-  name: string;
-  email: string;
+  user: AuthUser;
   token: string;
 }
 
@@ -22,4 +23,3 @@ export interface RegisterPayload {
   email: string;
   password: string;
 }
-

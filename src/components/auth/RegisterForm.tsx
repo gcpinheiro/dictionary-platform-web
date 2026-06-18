@@ -1,11 +1,11 @@
 "use client";
 
-import { BookOpenText, LoaderCircle } from "lucide-react";
+import { BookOpenText, Eye, EyeOff, LoaderCircle } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { z } from "zod";
-import { saveAuthSession } from "@/lib/auth-storage";
+import { isAuthenticated, saveAuthSession } from "@/lib/auth-storage";
 import { registerUser } from "@/services/auth.service";
 
 const registerSchema = z
@@ -39,6 +39,9 @@ export function RegisterForm() {
   const [formError, setFormError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false);
   const isPasswordConfirmationInvalid =
     Boolean(values.confirmPassword) &&
     values.password !== values.confirmPassword;
@@ -49,6 +52,12 @@ export function RegisterForm() {
     !values.password ||
     !values.confirmPassword ||
     isPasswordConfirmationInvalid;
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      router.replace("/");
+    }
+  }, [router]);
 
   function updateField(field: keyof RegisterFormValues, value: string) {
     const nextValues = {
@@ -193,19 +202,40 @@ export function RegisterForm() {
             >
               Senha
             </label>
-            <input
-              aria-describedby={errors.password ? "password-error" : undefined}
-              aria-invalid={Boolean(errors.password)}
-              autoComplete="new-password"
-              className="h-12 w-full rounded-xl border border-[#E2E8F0] bg-white px-4 text-base text-[#0F172A] outline-none transition placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:ring-4 focus:ring-[#DBEAFE]"
-              disabled={isSubmitting}
-              id="password"
-              name="password"
-              onChange={(event) => updateField("password", event.target.value)}
-              placeholder="Pelo menos 6 caracteres"
-              type="password"
-              value={values.password}
-            />
+            <div className="relative">
+              <input
+                aria-describedby={
+                  errors.password ? "password-error" : undefined
+                }
+                aria-invalid={Boolean(errors.password)}
+                autoComplete="new-password"
+                className="h-12 w-full rounded-xl border border-[#E2E8F0] bg-white px-4 pr-12 text-base text-[#0F172A] outline-none transition placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:ring-4 focus:ring-[#DBEAFE]"
+                disabled={isSubmitting}
+                id="password"
+                name="password"
+                onChange={(event) =>
+                  updateField("password", event.target.value)
+                }
+                placeholder="Pelo menos 6 caracteres"
+                type={isPasswordVisible ? "text" : "password"}
+                value={values.password}
+              />
+              <button
+                aria-label={
+                  isPasswordVisible ? "Ocultar senha" : "Mostrar senha"
+                }
+                className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-[#475569] transition hover:bg-[#F8FAFC] focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
+                disabled={isSubmitting}
+                onClick={() => setIsPasswordVisible((current) => !current)}
+                type="button"
+              >
+                {isPasswordVisible ? (
+                  <EyeOff aria-hidden="true" size={18} />
+                ) : (
+                  <Eye aria-hidden="true" size={18} />
+                )}
+              </button>
+            </div>
             {errors.password ? (
               <p className="mt-2 text-sm text-[#DC2626]" id="password-error">
                 {errors.password}
@@ -220,27 +250,48 @@ export function RegisterForm() {
             >
               Confirmar senha
             </label>
-            <input
-              aria-describedby={
-                errors.confirmPassword || isPasswordConfirmationInvalid
-                  ? "confirm-password-error"
-                  : undefined
-              }
-              aria-invalid={Boolean(
-                errors.confirmPassword || isPasswordConfirmationInvalid,
-              )}
-              autoComplete="new-password"
-              className="h-12 w-full rounded-xl border border-[#E2E8F0] bg-white px-4 text-base text-[#0F172A] outline-none transition placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:ring-4 focus:ring-[#DBEAFE]"
-              disabled={isSubmitting}
-              id="confirmPassword"
-              name="confirmPassword"
-              onChange={(event) =>
-                updateField("confirmPassword", event.target.value)
-              }
-              placeholder="Repita sua senha"
-              type="password"
-              value={values.confirmPassword}
-            />
+            <div className="relative">
+              <input
+                aria-describedby={
+                  errors.confirmPassword || isPasswordConfirmationInvalid
+                    ? "confirm-password-error"
+                    : undefined
+                }
+                aria-invalid={Boolean(
+                  errors.confirmPassword || isPasswordConfirmationInvalid,
+                )}
+                autoComplete="new-password"
+                className="h-12 w-full rounded-xl border border-[#E2E8F0] bg-white px-4 pr-12 text-base text-[#0F172A] outline-none transition placeholder:text-[#94A3B8] focus:border-[#2563EB] focus:ring-4 focus:ring-[#DBEAFE]"
+                disabled={isSubmitting}
+                id="confirmPassword"
+                name="confirmPassword"
+                onChange={(event) =>
+                  updateField("confirmPassword", event.target.value)
+                }
+                placeholder="Repita sua senha"
+                type={isConfirmPasswordVisible ? "text" : "password"}
+                value={values.confirmPassword}
+              />
+              <button
+                aria-label={
+                  isConfirmPasswordVisible
+                    ? "Ocultar confirmação de senha"
+                    : "Mostrar confirmação de senha"
+                }
+                className="absolute right-3 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-[#475569] transition hover:bg-[#F8FAFC] focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
+                disabled={isSubmitting}
+                onClick={() =>
+                  setIsConfirmPasswordVisible((current) => !current)
+                }
+                type="button"
+              >
+                {isConfirmPasswordVisible ? (
+                  <EyeOff aria-hidden="true" size={18} />
+                ) : (
+                  <Eye aria-hidden="true" size={18} />
+                )}
+              </button>
+            </div>
             {errors.confirmPassword || isPasswordConfirmationInvalid ? (
               <p
                 className="mt-2 text-sm text-[#DC2626]"
