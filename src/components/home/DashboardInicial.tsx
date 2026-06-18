@@ -4,6 +4,7 @@ import { BookOpenText, Heart } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AppHeader } from "@/components/layout/AppHeader";
+import { AuthenticatedPageSkeleton } from "@/components/ui/Skeletons";
 import { getAuthSession } from "@/lib/auth-storage";
 import type { AuthSession } from "@/types/auth";
 import { BuscaPalavras } from "./BuscaPalavras";
@@ -16,13 +17,7 @@ export function DashboardInicial() {
   }, []);
 
   if (!session) {
-    return (
-      <main className="min-h-screen bg-[#F8FAFC] px-4 py-8">
-        <p className="text-sm font-medium text-[#475569]">
-          Carregando sessão...
-        </p>
-      </main>
-    );
+    return <AuthenticatedPageSkeleton />;
   }
 
   return (

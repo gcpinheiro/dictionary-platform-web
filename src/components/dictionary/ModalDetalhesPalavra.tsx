@@ -2,6 +2,7 @@
 
 import { X } from "lucide-react";
 import { useEffect, useId, useState } from "react";
+import { WordDetailsSkeleton } from "@/components/ui/Skeletons";
 import { getWordDetails } from "@/services/words.service";
 import type { WordDetail } from "@/types/word";
 
@@ -80,11 +81,7 @@ export function ModalDetalhesPalavra({
           </button>
         </header>
 
-        {isLoading ? (
-          <p className="mt-6 text-sm font-medium text-[#475569]">
-            Carregando detalhes...
-          </p>
-        ) : null}
+        {isLoading ? <WordDetailsSkeleton /> : null}
 
         {error ? (
           <p className="mt-6 rounded-xl bg-red-50 px-4 py-3 text-sm text-[#DC2626]">
@@ -157,4 +154,3 @@ export function ModalDetalhesPalavra({
     </div>
   );
 }
-

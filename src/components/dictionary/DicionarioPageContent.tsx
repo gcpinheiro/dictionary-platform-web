@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AppHeader } from "@/components/layout/AppHeader";
+import { DictionaryGridSkeleton } from "@/components/ui/Skeletons";
 import { getDictionaryWords } from "@/services/words.service";
 import type { WordDetail } from "@/types/word";
 import { ListaDicionario } from "./ListaDicionario";
@@ -79,13 +80,7 @@ export function DicionarioPageContent() {
         </header>
 
         <div className="mt-6">
-          {isLoading ? (
-            <section className="rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm">
-              <p className="text-sm font-medium text-[#475569]">
-                Carregando dicionário...
-              </p>
-            </section>
-          ) : null}
+          {isLoading ? <DictionaryGridSkeleton /> : null}
 
           {error ? (
             <section className="rounded-2xl border border-red-100 bg-red-50 p-6">

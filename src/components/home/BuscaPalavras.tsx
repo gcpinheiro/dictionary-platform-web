@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce";
 import { addSearchHistory, getRecentSearches } from "@/services/history.service";
 import { searchWords } from "@/services/words.service";
+import { HistorySkeleton, SearchResultsSkeleton } from "@/components/ui/Skeletons";
 import type { SearchHistoryItem } from "@/types/history";
 import type { WordSummary } from "@/types/word";
 import { HistoricoPesquisas } from "./HistoricoPesquisas";
@@ -131,11 +132,7 @@ export function BuscaPalavras({ userId }: BuscaPalavrasProps) {
           </p>
         ) : null}
 
-        {isSearching ? (
-          <p className="mt-4 text-sm font-medium text-[#475569]">
-            Buscando palavras...
-          </p>
-        ) : null}
+        {isSearching ? <SearchResultsSkeleton /> : null}
 
         {searchError ? (
           <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-sm text-[#DC2626]">
@@ -155,11 +152,7 @@ export function BuscaPalavras({ userId }: BuscaPalavrasProps) {
       </section>
 
       {isLoadingHistory ? (
-        <section className="rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm">
-          <p className="text-sm font-medium text-[#475569]">
-            Carregando histórico...
-          </p>
-        </section>
+        <HistorySkeleton />
       ) : historyError ? (
         <section className="rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm">
           <p className="text-sm text-[#DC2626]">{historyError}</p>
@@ -170,4 +163,3 @@ export function BuscaPalavras({ userId }: BuscaPalavrasProps) {
     </div>
   );
 }
-

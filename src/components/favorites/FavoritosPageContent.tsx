@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AppHeader } from "@/components/layout/AppHeader";
+import { FavoriteListSkeleton } from "@/components/ui/Skeletons";
 import { getAuthSession } from "@/lib/auth-storage";
 import { getFavorites, removeFavorite } from "@/services/favorites.service";
 import type { FavoriteWord } from "@/types/favorite";
@@ -92,13 +93,7 @@ export function FavoritosPageContent() {
         </header>
 
         <div className="mt-6">
-          {isLoading ? (
-            <section className="rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm">
-              <p className="text-sm font-medium text-[#475569]">
-                Carregando favoritos...
-              </p>
-            </section>
-          ) : null}
+          {isLoading ? <FavoriteListSkeleton /> : null}
 
           {error ? (
             <section className="rounded-2xl border border-red-100 bg-red-50 p-6">

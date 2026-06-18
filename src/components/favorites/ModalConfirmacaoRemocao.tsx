@@ -28,7 +28,7 @@ export function ModalConfirmacaoRemocao({
           className="mt-3 text-2xl font-bold leading-tight text-[#0F172A]"
           id="remove-favorite-title"
         >
-          Remover "{favorite.word}" dos favoritos?
+          Remover &quot;{favorite.word}&quot; dos favoritos?
         </h2>
         <p className="mt-3 text-sm text-[#475569]">
           Você poderá favoritar essa palavra novamente pela página de detalhes.

@@ -2,6 +2,7 @@
 
 import { Heart } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { getAuthSession } from "@/lib/auth-storage";
 import {
   addFavorite,
@@ -98,9 +99,7 @@ export function FavoriteButton({ word, wordId }: FavoriteButtonProps) {
         {favorite ? "Remover dos favoritos" : "Adicionar aos favoritos"}
       </button>
 
-      {isLoading ? (
-        <p className="text-sm text-[#475569]">Verificando favoritos...</p>
-      ) : null}
+      {isLoading ? <Skeleton className="h-4 w-40" /> : null}
 
       {feedback ? (
         <p className="text-sm font-medium text-[#16A34A]">{feedback}</p>

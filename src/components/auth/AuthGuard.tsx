@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
+import { AuthenticatedPageSkeleton } from "@/components/ui/Skeletons";
 import { getAuthSession } from "@/lib/auth-storage";
 
 interface AuthGuardProps {
@@ -26,13 +27,7 @@ export function AuthGuard({ children }: AuthGuardProps) {
   }, [router]);
 
   if (isCheckingSession) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-[#F8FAFC] px-4">
-        <p className="text-sm font-medium text-[#475569]">
-          Verificando sessão...
-        </p>
-      </main>
-    );
+    return <AuthenticatedPageSkeleton />;
   }
 
   if (!hasSession) {
@@ -41,4 +36,3 @@ export function AuthGuard({ children }: AuthGuardProps) {
 
   return children;
 }
-
