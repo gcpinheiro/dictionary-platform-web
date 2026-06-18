@@ -7,6 +7,7 @@ import { getAuthSession } from "@/lib/auth-storage";
 import { getFavorites, removeFavorite } from "@/services/favorites.service";
 import type { FavoriteWord } from "@/types/favorite";
 import { ListaFavoritos } from "./ListaFavoritos";
+import { ModalConfirmacaoRemocao } from "./ModalConfirmacaoRemocao";
 
 export function FavoritosPageContent() {
   const [favorites, setFavorites] = useState<FavoriteWord[]>([]);
@@ -14,6 +15,8 @@ export function FavoritosPageContent() {
   const [error, setError] = useState("");
   const [feedback, setFeedback] = useState("");
   const [removingId, setRemovingId] = useState("");
+  const [favoriteToRemove, setFavoriteToRemove] =
+    useState<FavoriteWord | null>(null);
 
   useEffect(() => {
     async function loadFavorites() {
@@ -37,7 +40,13 @@ export function FavoritosPageContent() {
     loadFavorites();
   }, []);
 
-  async function handleRemoveFavorite(favorite: FavoriteWord) {
+  async function handleRemoveFavorite() {
+    if (!favoriteToRemove) {
+      return;
+    }
+
+    const favorite = favoriteToRemove;
+
     setRemovingId(favorite.id);
     setFeedback("");
     setError("");
@@ -48,6 +57,7 @@ export function FavoritosPageContent() {
         currentFavorites.filter((item) => item.id !== favorite.id),
       );
       setFeedback(`${favorite.word} foi removida dos favoritos.`);
+      setFavoriteToRemove(null);
     } catch {
       setError("Não foi possível remover o favorito. Tente novamente.");
     } finally {
@@ -119,13 +129,22 @@ export function FavoritosPageContent() {
           {!isLoading && !error && favorites.length ? (
             <ListaFavoritos
               favorites={favorites}
-              onRemove={handleRemoveFavorite}
+              onRemove={setFavoriteToRemove}
               removingId={removingId}
             />
           ) : null}
         </div>
       </section>
     </main>
+
+      {favoriteToRemove ? (
+        <ModalConfirmacaoRemocao
+          favorite={favoriteToRemove}
+          isRemoving={removingId === favoriteToRemove.id}
+          onCancel={() => setFavoriteToRemove(null)}
+          onConfirm={handleRemoveFavorite}
+        />
+      ) : null}
     </>
   );
 }

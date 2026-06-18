@@ -26,7 +26,7 @@ export function CardFavorito({
 
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link
-            className="inline-flex h-11 items-center justify-center rounded-xl border border-[#E2E8F0] bg-white px-4 text-sm font-semibold text-[#0F172A] transition hover:bg-[#F8FAFC] focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
+            className="inline-flex h-11 cursor-pointer items-center justify-center rounded-xl border border-[#E2E8F0] bg-white px-4 text-sm font-semibold text-[#0F172A] transition hover:bg-[#F8FAFC] focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
             href={`/palavras/${encodeURIComponent(favorite.word)}`}
           >
             Ver detalhes
@@ -44,4 +44,3 @@ export function CardFavorito({
     </article>
   );
 }
-

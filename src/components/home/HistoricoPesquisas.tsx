@@ -17,7 +17,7 @@ export function HistoricoPesquisas({ history }: HistoricoPesquisasProps) {
           {history.map((item) => (
             <li key={item.id}>
               <Link
-                className="inline-flex h-10 items-center rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] px-4 text-sm font-semibold text-[#0F172A] transition hover:border-[#2563EB] hover:text-[#2563EB] focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
+                className="inline-flex h-10 cursor-pointer items-center rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] px-4 text-sm font-semibold text-[#0F172A] transition hover:border-[#2563EB] hover:text-[#2563EB] focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
                 href={`/palavras/${encodeURIComponent(item.word)}`}
               >
                 {item.word}
@@ -33,4 +33,3 @@ export function HistoricoPesquisas({ history }: HistoricoPesquisasProps) {
     </section>
   );
 }
-

@@ -11,7 +11,7 @@ export function ListaDicionario({ words, onSelectWord }: ListaDicionarioProps) {
       {words.map((item) => (
         <li key={item.id}>
           <button
-            className="flex h-full w-full flex-col items-start rounded-2xl border border-[#E2E8F0] bg-white p-5 text-left shadow-sm transition hover:border-[#2563EB] hover:shadow-md focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
+            className="flex h-full w-full cursor-pointer flex-col items-start rounded-2xl border border-[#E2E8F0] bg-white p-5 text-left shadow-sm transition hover:border-[#2563EB] hover:shadow-md focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
             onClick={() => onSelectWord(item.word)}
             type="button"
           >
@@ -30,4 +30,3 @@ export function ListaDicionario({ words, onSelectWord }: ListaDicionarioProps) {
     </ul>
   );
 }
-

@@ -48,7 +48,7 @@ export function DashboardInicial() {
 
         <aside className="grid content-start gap-4">
           <Link
-            className="rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm transition hover:border-[#2563EB] hover:shadow-md focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
+            className="cursor-pointer rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm transition hover:border-[#2563EB] hover:shadow-md focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
             href="/favoritos"
           >
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#DBEAFE] text-[#2563EB]">
@@ -63,7 +63,7 @@ export function DashboardInicial() {
           </Link>
 
           <Link
-            className="rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm transition hover:border-[#2563EB] hover:shadow-md focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
+            className="cursor-pointer rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm transition hover:border-[#2563EB] hover:shadow-md focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
             href="/dicionario"
           >
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#DBEAFE] text-[#2563EB]">
