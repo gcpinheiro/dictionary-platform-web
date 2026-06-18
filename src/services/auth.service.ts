@@ -19,6 +19,9 @@ export async function loginUser(
 ): Promise<AuthSession> {
   const users = await request<UserRecord[]>(
     `/users?email=${encodeURIComponent(payload.email)}`,
+    {
+      cache: "no-store",
+    },
   );
   const user = users[0];
 
@@ -41,6 +44,12 @@ export async function registerUser(
 ): Promise<AuthSession> {
   const users = await request<UserRecord[]>(
     `/users?email=${encodeURIComponent(payload.email)}`,
+    {
+      cache: "no-store",
+      retry: {
+        attempts: 2,
+      },
+    },
   );
 
   if (users.length > 0) {
@@ -49,6 +58,7 @@ export async function registerUser(
 
   const user = await request<UserRecord>("/users", {
     method: "POST",
+    cache: "no-store",
     body: JSON.stringify(payload),
   });
 

@@ -6,6 +6,10 @@ export async function getRecentSearches(
 ): Promise<SearchHistoryItem[]> {
   return request<SearchHistoryItem[]>(
     `/history?userId=${encodeURIComponent(userId)}&_sort=createdAt&_order=desc&_limit=6`,
+    {
+      cache: "no-store",
+      retry: true,
+    },
   );
 }
 
@@ -15,6 +19,7 @@ export async function addSearchHistory(
 ): Promise<SearchHistoryItem> {
   return request<SearchHistoryItem>("/history", {
     method: "POST",
+    cache: "no-store",
     body: JSON.stringify({
       userId,
       word,
