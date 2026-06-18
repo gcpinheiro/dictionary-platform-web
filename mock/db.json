@@ -5,6 +5,12 @@
       "name": "Gabriel Pinheiro",
       "email": "gabriel@example.com",
       "password": "123456"
+    },
+    {
+      "name": "Gabriel Castro",
+      "email": "egcastro96@gmail.com",
+      "password": "senhasenha",
+      "id": "3kyA_Rq"
     }
   ],
   "words": [
@@ -25,7 +31,11 @@
               "example": "Solar energy can reduce electricity costs."
             }
           ],
-          "synonyms": ["power", "force", "vitality"]
+          "synonyms": [
+            "power",
+            "force",
+            "vitality"
+          ]
         }
       ]
     },
@@ -42,7 +52,10 @@
               "example": "The company installed solar panels on the roof."
             }
           ],
-          "synonyms": ["sun-powered", "heliacal"]
+          "synonyms": [
+            "sun-powered",
+            "heliacal"
+          ]
         }
       ]
     },
@@ -63,7 +76,11 @@
               "example": "The city depends on a reliable power grid."
             }
           ],
-          "synonyms": ["network", "matrix", "mesh"]
+          "synonyms": [
+            "network",
+            "matrix",
+            "mesh"
+          ]
         }
       ]
     },
@@ -80,7 +97,11 @@
               "example": "The smart meter reports consumption every hour."
             }
           ],
-          "synonyms": ["gauge", "measure", "indicator"]
+          "synonyms": [
+            "gauge",
+            "measure",
+            "indicator"
+          ]
         }
       ]
     },
@@ -97,7 +118,11 @@
               "example": "The battery stores enough power for the evening."
             }
           ],
-          "synonyms": ["capacity", "strength", "energy"]
+          "synonyms": [
+            "capacity",
+            "strength",
+            "energy"
+          ]
         }
       ]
     },
@@ -114,7 +139,10 @@
               "example": "Wind and solar are renewable energy sources."
             }
           ],
-          "synonyms": ["sustainable", "replenishable"]
+          "synonyms": [
+            "sustainable",
+            "replenishable"
+          ]
         }
       ]
     },
@@ -131,7 +159,10 @@
               "example": "The battery supports the system during peak demand."
             }
           ],
-          "synonyms": ["cell", "accumulator"]
+          "synonyms": [
+            "cell",
+            "accumulator"
+          ]
         }
       ]
     },
@@ -148,7 +179,10 @@
               "example": "The vehicle can charge overnight."
             }
           ],
-          "synonyms": ["load", "energize"]
+          "synonyms": [
+            "load",
+            "energize"
+          ]
         }
       ]
     },
@@ -165,7 +199,11 @@
               "example": "The plant supplies energy to thousands of homes."
             }
           ],
-          "synonyms": ["facility", "station", "works"]
+          "synonyms": [
+            "facility",
+            "station",
+            "works"
+          ]
         }
       ]
     },
@@ -182,7 +220,11 @@
               "example": "Energy storage helps balance supply and demand."
             }
           ],
-          "synonyms": ["retention", "reserve", "stockpile"]
+          "synonyms": [
+            "retention",
+            "reserve",
+            "stockpile"
+          ]
         }
       ]
     },
@@ -199,7 +241,9 @@
               "example": "The technician checked the voltage before reconnecting the equipment."
             }
           ],
-          "synonyms": ["electric potential"]
+          "synonyms": [
+            "electric potential"
+          ]
         }
       ]
     },
@@ -216,7 +260,10 @@
               "example": "The sensor measures current in real time."
             }
           ],
-          "synonyms": ["flow", "stream"]
+          "synonyms": [
+            "flow",
+            "stream"
+          ]
         }
       ]
     }
@@ -238,4 +285,3 @@
     }
   ]
 }
-

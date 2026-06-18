@@ -22,7 +22,7 @@ export async function loginUser(
     userId: user.id,
     name: user.name,
     email: user.email,
-    token: crypto.randomUUID(),
+    token: `mock-token-${user.id}`,
   };
 }
 
@@ -46,6 +46,6 @@ export async function registerUser(
     userId: user.id,
     name: user.name,
     email: user.email,
-    token: crypto.randomUUID(),
+    token: `mock-token-${user.id}`,
   };
 }
