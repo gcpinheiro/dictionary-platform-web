@@ -23,6 +23,6 @@ export async function removeFavorite(id: string): Promise<void> {
   });
 
   if (!response.ok) {
-    throw new Error("Unable to remove favorite");
+    throw new Error("Não foi possível remover o favorito");
   }
 }

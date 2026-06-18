@@ -15,7 +15,7 @@ export class ApiError extends Error {
 }
 
 async function readErrorMessage(response: Response): Promise<string> {
-  const fallbackMessage = `Request failed with status ${response.status}`;
+  const fallbackMessage = `A requisição falhou com status ${response.status}`;
 
   try {
     const body = (await response.json()) as ApiErrorBody;

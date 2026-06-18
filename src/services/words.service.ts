@@ -17,7 +17,7 @@ export async function getWordDetails(word: string): Promise<WordDetail> {
   const [wordDetails] = words;
 
   if (!wordDetails) {
-    throw new Error("Word not found");
+    throw new Error("Palavra não encontrada");
   }
 
   return wordDetails;
@@ -31,4 +31,3 @@ export async function getDictionaryWords(
     `/words?_page=${page}&_per_page=${perPage}`,
   );
 }
-

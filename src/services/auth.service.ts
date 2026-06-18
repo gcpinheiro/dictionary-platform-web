@@ -15,7 +15,7 @@ export async function loginUser(
   const user = users[0];
 
   if (!user || user.password !== payload.password) {
-    throw new Error("Invalid email or password");
+    throw new Error("E-mail ou senha inválidos");
   }
 
   return {
@@ -34,7 +34,7 @@ export async function registerUser(
   );
 
   if (users.length > 0) {
-    throw new Error("Email already registered");
+    throw new Error("Este e-mail já está cadastrado");
   }
 
   const user = await request<AuthUser>("/users", {
@@ -49,4 +49,3 @@ export async function registerUser(
     token: crypto.randomUUID(),
   };
 }
-
