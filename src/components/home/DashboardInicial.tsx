@@ -3,7 +3,7 @@
 import { BookOpenText, Heart } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { LogoutButton } from "@/components/auth/LogoutButton";
+import { AppHeader } from "@/components/layout/AppHeader";
 import { getAuthSession } from "@/lib/auth-storage";
 import type { AuthSession } from "@/types/auth";
 import { BuscaPalavras } from "./BuscaPalavras";
@@ -26,40 +26,12 @@ export function DashboardInicial() {
   }
 
   return (
-    <main className="min-h-screen bg-[#F8FAFC] px-4 py-6 sm:px-6 lg:px-8">
-      <header className="mx-auto flex w-full max-w-6xl flex-col gap-4 rounded-2xl border border-[#E2E8F0] bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
-        <Link className="flex items-center gap-3" href="/">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#DBEAFE] text-[#2563EB]">
-            <BookOpenText aria-hidden="true" size={20} />
-          </span>
-          <span className="text-base font-bold text-[#0F172A]">
-            Plataforma de Dicionário
-          </span>
-        </Link>
-
-        <nav
-          aria-label="Navegação principal"
-          className="flex flex-wrap items-center gap-3"
-        >
-          <Link
-            className="text-sm font-semibold text-[#475569] transition hover:text-[#2563EB] focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
-            href="/favoritos"
-          >
-            Favoritos
-          </Link>
-          <Link
-            className="text-sm font-semibold text-[#475569] transition hover:text-[#2563EB] focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
-            href="/dicionario"
-          >
-            Dicionário
-          </Link>
-          <LogoutButton />
-        </nav>
-      </header>
-
-      <section className="mx-auto mt-8 grid w-full max-w-6xl gap-6 lg:grid-cols-[1fr_320px]">
+    <>
+      <AppHeader />
+      <main className="min-h-screen bg-[#F8FAFC] px-4 py-8 sm:px-6 lg:px-8">
+        <section className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-[1fr_320px]">
         <div className="grid gap-6">
-          <section className="rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm sm:p-8">
+          <section className="animate-fade-in-up rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm sm:p-8">
             <p className="text-sm font-semibold uppercase tracking-wide text-[#2563EB]">
               Bem-vindo de volta
             </p>
@@ -106,6 +78,7 @@ export function DashboardInicial() {
           </Link>
         </aside>
       </section>
-    </main>
+      </main>
+    </>
   );
 }

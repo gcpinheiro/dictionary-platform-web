@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AppHeader } from "@/components/layout/AppHeader";
 import { getDictionaryWords } from "@/services/words.service";
 import type { WordDetail } from "@/types/word";
 import { ListaDicionario } from "./ListaDicionario";
@@ -52,9 +53,11 @@ export function DicionarioPageContent() {
   }, [page]);
 
   return (
-    <main className="min-h-screen bg-[#F8FAFC] px-4 py-6 sm:px-6 lg:px-8">
+    <>
+      <AppHeader />
+      <main className="min-h-screen bg-[#F8FAFC] px-4 py-8 sm:px-6 lg:px-8">
       <section className="mx-auto w-full max-w-6xl">
-        <header className="flex flex-col gap-4 rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+        <header className="animate-fade-in-up flex flex-col gap-4 rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-wide text-[#2563EB]">
               Dicionário
@@ -122,5 +125,6 @@ export function DicionarioPageContent() {
         />
       ) : null}
     </main>
+    </>
   );
 }

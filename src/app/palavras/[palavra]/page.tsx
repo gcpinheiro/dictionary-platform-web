@@ -24,13 +24,11 @@ export default async function WordPage({ params }: WordPageProps) {
 
   return (
     <AuthGuard>
-      <main className="min-h-screen bg-[#F8FAFC] px-4 py-8">
-        <WordDetails
-          errorMessage={errorMessage}
-          requestedWord={decodedWord}
-          word={wordDetails}
-        />
-      </main>
+      <WordDetails
+        errorMessage={errorMessage}
+        requestedWord={decodedWord}
+        word={wordDetails}
+      />
     </AuthGuard>
   );
 }

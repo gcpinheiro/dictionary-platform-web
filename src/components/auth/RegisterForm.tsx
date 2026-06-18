@@ -1,10 +1,11 @@
 "use client";
 
-import { BookOpenText, Eye, EyeOff, LoaderCircle } from "lucide-react";
+import { Eye, EyeOff, LoaderCircle } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SyntheticEvent, useEffect, useState } from "react";
 import { z } from "zod";
+import { AuthLayout } from "@/components/auth/AuthLayout";
 import { isAuthenticated, saveAuthSession } from "@/lib/auth-storage";
 import { registerUser } from "@/services/auth.service";
 
@@ -127,20 +128,21 @@ export function RegisterForm() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#F8FAFC] px-4 py-8 sm:px-6 lg:px-8">
-      <section className="w-full max-w-md rounded-2xl border border-[#E2E8F0] bg-[#FFFFFF] p-6 shadow-md sm:p-8">
-        <div className="mb-8 flex flex-col items-center text-center">
-          <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-[#DBEAFE] text-[#2563EB]">
-            <BookOpenText aria-hidden="true" size={24} strokeWidth={2.2} />
-          </div>
-          <h1 className="text-[32px] font-bold leading-tight text-[#0F172A]">
-            Crie sua conta
-          </h1>
-          <p className="mt-3 text-lg font-medium text-[#475569]">
-            Comece a explorar a plataforma de dicionário.
-          </p>
-        </div>
-
+    <AuthLayout
+      footer={
+        <p className="mt-8 text-center text-sm text-[#475569]">
+          Já tem uma conta?{" "}
+          <Link
+            className="font-semibold text-[#2563EB] transition hover:text-[#1D4ED8] focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
+            href="/entrar"
+          >
+            Entrar
+          </Link>
+        </p>
+      }
+      subtitle="Comece a explorar a plataforma de dicionário."
+      title="Crie sua conta"
+    >
         <form className="space-y-5" noValidate onSubmit={handleSubmit}>
           <div>
             <label
@@ -329,17 +331,6 @@ export function RegisterForm() {
             {isSubmitting ? "Criando conta..." : "Criar conta"}
           </button>
         </form>
-
-        <p className="mt-8 text-center text-sm text-[#475569]">
-          Já tem uma conta?{" "}
-          <Link
-            className="font-semibold text-[#2563EB] transition hover:text-[#1D4ED8] focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
-            href="/entrar"
-          >
-            Entrar
-          </Link>
-        </p>
-      </section>
-    </main>
+    </AuthLayout>
   );
 }

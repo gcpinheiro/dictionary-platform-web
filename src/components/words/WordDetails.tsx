@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { AppHeader } from "@/components/layout/AppHeader";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import type { WordDetail } from "@/types/word";
 import { FavoriteButton } from "./FavoriteButton";
 
@@ -17,50 +19,72 @@ export function WordDetails({
     const isNotFound = errorMessage === "Palavra não encontrada" || !word;
 
     return (
-      <section className="mx-auto w-full max-w-5xl">
-        <div className="rounded-2xl border border-[#E2E8F0] bg-white p-8 text-center shadow-sm">
-          <p className="text-sm font-semibold uppercase tracking-wide text-[#2563EB]">
-            Palavra
-          </p>
-          <h1 className="mt-3 text-[32px] font-bold leading-tight text-[#0F172A]">
-            {requestedWord}
-          </h1>
-          <p className="mt-4 text-base text-[#475569]">
-            {isNotFound
-              ? "Palavra não encontrada"
-              : "Não foi possível carregar os detalhes da palavra."}
-          </p>
-          <Link
-            className="mt-6 inline-flex h-11 items-center justify-center rounded-xl bg-[#2563EB] px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#1D4ED8] focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
-            href="/"
-          >
-            Voltar para início
-          </Link>
-        </div>
-      </section>
+      <>
+        <AppHeader />
+        <main className="min-h-screen bg-[#F8FAFC]">
+          <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+            <Breadcrumbs
+              items={[
+                { href: "/", label: "Início" },
+                { href: "/dicionario", label: "Dicionário" },
+                { label: requestedWord },
+              ]}
+            />
+            <div className="animate-soft-scale rounded-2xl border border-[#E2E8F0] bg-white p-8 text-center shadow-sm">
+              <p className="text-sm font-semibold uppercase tracking-wide text-[#2563EB]">
+                Palavra
+              </p>
+              <h1 className="mt-3 text-[32px] font-bold leading-tight text-[#0F172A]">
+                {requestedWord}
+              </h1>
+              <p className="mt-4 text-base text-[#475569]">
+                {isNotFound
+                  ? "Palavra não encontrada"
+                  : "Não foi possível carregar os detalhes da palavra."}
+              </p>
+              <Link
+                className="mt-6 inline-flex h-11 items-center justify-center rounded-xl bg-[#2563EB] px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#1D4ED8] focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
+                href="/"
+              >
+                Voltar para início
+              </Link>
+            </div>
+          </section>
+        </main>
+      </>
     );
   }
 
   return (
-    <section className="mx-auto grid w-full max-w-5xl gap-6">
-      <header className="rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm sm:p-8">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-wide text-[#2563EB]">
-              Detalhes da palavra
-            </p>
-            <h1 className="mt-3 text-[32px] font-bold leading-tight text-[#0F172A]">
-              {word.word}
-            </h1>
-            {word.phonetic ? (
-              <p className="mt-3 text-base font-medium text-[#475569]">
-                Fonética: {word.phonetic}
-              </p>
-            ) : null}
-          </div>
-          <FavoriteButton word={word.word} wordId={word.id} />
-        </div>
-      </header>
+    <>
+      <AppHeader />
+      <main className="min-h-screen bg-[#F8FAFC]">
+        <section className="mx-auto grid w-full max-w-5xl gap-6 px-4 py-8 sm:px-6 lg:px-8">
+          <Breadcrumbs
+            items={[
+              { href: "/", label: "Início" },
+              { href: "/dicionario", label: "Dicionário" },
+              { label: word.word },
+            ]}
+          />
+          <header className="animate-fade-in-up rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm sm:p-8">
+            <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="text-sm font-semibold uppercase tracking-wide text-[#2563EB]">
+                  Detalhes da palavra
+                </p>
+                <h1 className="mt-3 text-[32px] font-bold leading-tight text-[#0F172A]">
+                  {word.word}
+                </h1>
+                {word.phonetic ? (
+                  <p className="mt-3 text-base font-medium text-[#475569]">
+                    Fonética: {word.phonetic}
+                  </p>
+                ) : null}
+              </div>
+              <FavoriteButton word={word.word} wordId={word.id} />
+            </div>
+          </header>
 
       <section className="rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm sm:p-8">
         <h2 className="text-2xl font-bold text-[#0F172A]">Definições</h2>
@@ -114,8 +138,9 @@ export function WordDetails({
             </article>
           ))}
         </div>
-      </section>
-    </section>
+          </section>
+        </section>
+      </main>
+    </>
   );
 }
-
