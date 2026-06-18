@@ -17,17 +17,14 @@ export interface WordDetail {
   meanings: WordMeaning[];
 }
 
+export interface WordSummary {
+  id: string;
+  word: string;
+}
+
 export interface FavoriteWord {
   id: string;
   userId: string;
   wordId: string;
   word: string;
 }
-
-export interface SearchHistoryItem {
-  id: string;
-  userId: string;
-  word: string;
-  createdAt: string;
-}
-

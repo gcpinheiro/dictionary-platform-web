@@ -1,13 +1,13 @@
 import { request } from "@/services/http";
 import type { PaginatedResponse } from "@/types/api";
-import type { WordDetail } from "@/types/word";
+import type { WordDetail, WordSummary } from "@/types/word";
 
-export async function searchWords(query: string): Promise<WordDetail[]> {
+export async function searchWords(query: string): Promise<WordSummary[]> {
   if (!query.trim()) {
     return [];
   }
 
-  return request<WordDetail[]>(`/words?q=${encodeURIComponent(query)}`);
+  return request<WordSummary[]>(`/words?q=${encodeURIComponent(query)}`);
 }
 
 export async function getWordDetails(word: string): Promise<WordDetail> {

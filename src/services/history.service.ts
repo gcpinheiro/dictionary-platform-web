@@ -1,23 +1,26 @@
 import { request } from "@/services/http";
-import type { SearchHistoryItem } from "@/types/word";
+import type { SearchHistoryItem } from "@/types/history";
 
-export async function getSearchHistory(
+export async function getRecentSearches(
   userId: string,
 ): Promise<SearchHistoryItem[]> {
   return request<SearchHistoryItem[]>(
-    `/history?userId=${encodeURIComponent(userId)}&_sort=createdAt&_order=desc`,
+    `/history?userId=${encodeURIComponent(userId)}&_sort=createdAt&_order=desc&_limit=6`,
   );
 }
 
 export async function addSearchHistory(
-  item: Omit<SearchHistoryItem, "id" | "createdAt">,
+  userId: string,
+  word: string,
 ): Promise<SearchHistoryItem> {
   return request<SearchHistoryItem>("/history", {
     method: "POST",
     body: JSON.stringify({
-      ...item,
+      userId,
+      word,
       createdAt: new Date().toISOString(),
     }),
   });
 }
 
+export const getSearchHistory = getRecentSearches;
