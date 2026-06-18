@@ -2,9 +2,9 @@
 
 import { Heart } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useAuthSession } from "@/components/auth/AuthGuard";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useToast } from "@/components/ui/ToastProvider";
-import { getAuthSession } from "@/lib/auth-storage";
 import {
   addFavorite,
   getFavorites,
@@ -19,23 +19,14 @@ interface FavoriteButtonProps {
 
 export function FavoriteButton({ word, wordId }: FavoriteButtonProps) {
   const { showToast } = useToast();
+  const session = useAuthSession();
   const [favorite, setFavorite] = useState<FavoriteWord | null>(null);
-  const [userId, setUserId] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdating, setIsUpdating] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
     async function loadFavoriteState() {
-      const session = getAuthSession();
-
-      if (!session) {
-        setIsLoading(false);
-        return;
-      }
-
-      setUserId(session.user.id);
-
       try {
         const favorites = await getFavorites(session.user.id);
         const currentFavorite =
@@ -50,13 +41,9 @@ export function FavoriteButton({ word, wordId }: FavoriteButtonProps) {
     }
 
     loadFavoriteState();
-  }, [wordId]);
+  }, [session.user.id, wordId]);
 
   async function handleToggleFavorite() {
-    if (!userId) {
-      return;
-    }
-
     setIsUpdating(true);
     setError("");
 
@@ -72,7 +59,7 @@ export function FavoriteButton({ word, wordId }: FavoriteButtonProps) {
       }
 
       const newFavorite = await addFavorite({
-        userId,
+        userId: session.user.id,
         wordId,
         word,
       });

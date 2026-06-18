@@ -2,23 +2,12 @@
 
 import { BookOpenText, Heart } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useAuthSession } from "@/components/auth/AuthGuard";
 import { AppHeader } from "@/components/layout/AppHeader";
-import { AuthenticatedPageSkeleton } from "@/components/ui/Skeletons";
-import { getAuthSession } from "@/lib/auth-storage";
-import type { AuthSession } from "@/types/auth";
 import { BuscaPalavras } from "./BuscaPalavras";
 
 export function DashboardInicial() {
-  const [session, setSession] = useState<AuthSession | null>(null);
-
-  useEffect(() => {
-    setSession(getAuthSession());
-  }, []);
-
-  if (!session) {
-    return <AuthenticatedPageSkeleton />;
-  }
+  const session = useAuthSession();
 
   return (
     <>

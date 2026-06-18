@@ -28,14 +28,15 @@ export async function getDictionaryWords(
   perPage: number,
 ): Promise<PaginatedResponse<WordDetail>> {
   const response = await request<PaginatedResponse<WordDetail> | WordDetail[]>(
-    `/words?_page=${page}&_per_page=${perPage}`,
+    `/words?_page=${page}&_limit=${perPage}`,
   );
 
   if (Array.isArray(response)) {
     return {
       data: response,
       items: response.length,
-      pages: response.length ? page : Math.max(page - 1, 1),
+      next: response.length === perPage ? page + 1 : undefined,
+      pages: response.length === perPage ? page + 1 : page,
     };
   }
 

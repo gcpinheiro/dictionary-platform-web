@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useAuthSession } from "@/components/auth/AuthGuard";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { FavoriteListSkeleton } from "@/components/ui/Skeletons";
 import { useToast } from "@/components/ui/ToastProvider";
-import { getAuthSession } from "@/lib/auth-storage";
 import { getFavorites, removeFavorite } from "@/services/favorites.service";
 import type { FavoriteWord } from "@/types/favorite";
 import { ListaFavoritos } from "./ListaFavoritos";
@@ -13,6 +13,7 @@ import { ModalConfirmacaoRemocao } from "./ModalConfirmacaoRemocao";
 
 export function FavoritosPageContent() {
   const { showToast } = useToast();
+  const session = useAuthSession();
   const [favorites, setFavorites] = useState<FavoriteWord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -22,13 +23,6 @@ export function FavoritosPageContent() {
 
   useEffect(() => {
     async function loadFavorites() {
-      const session = getAuthSession();
-
-      if (!session) {
-        setIsLoading(false);
-        return;
-      }
-
       try {
         const userFavorites = await getFavorites(session.user.id);
         setFavorites(userFavorites);
@@ -40,7 +34,7 @@ export function FavoritosPageContent() {
     }
 
     loadFavorites();
-  }, []);
+  }, [session.user.id]);
 
   async function handleRemoveFavorite() {
     if (!favoriteToRemove) {

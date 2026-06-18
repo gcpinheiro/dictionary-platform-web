@@ -15,7 +15,7 @@ export function AppHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-30 border-b border-[#E2E8F0]/80 bg-[#F8FAFC]/90 px-4 py-4 backdrop-blur sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-30 border-b border-[#E2E8F0]/80 bg-[#F8FAFC]/95 px-4 py-4 sm:px-6 lg:px-8">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 rounded-2xl border border-[#E2E8F0] bg-white/95 p-3 shadow-sm sm:flex-row sm:items-center sm:justify-between">
         <Link
           className="flex items-center gap-3 rounded-xl focus:outline-none focus:ring-4 focus:ring-[#DBEAFE]"
@@ -57,4 +57,3 @@ export function AppHeader() {
     </header>
   );
 }
-

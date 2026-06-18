@@ -3,12 +3,12 @@
 import { CircleAlert, CircleCheck, Info, X } from "lucide-react";
 import {
   createContext,
-  ReactNode,
   useCallback,
   useContext,
   useRef,
   useState,
 } from "react";
+import type { ReactNode } from "react";
 
 type ToastType = "success" | "error" | "info";
 
@@ -83,7 +83,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
 
           return (
             <section
-              className={`animate-fade-in-up rounded-2xl border p-4 shadow-md backdrop-blur ${toastStyles[toast.type]}`}
+              className={`animate-fade-in-up rounded-2xl border p-4 shadow-md ${toastStyles[toast.type]}`}
               key={toast.id}
               role="status"
             >

@@ -1,28 +1,37 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { ReactNode, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { AuthenticatedPageSkeleton } from "@/components/ui/Skeletons";
 import { getAuthSession } from "@/lib/auth-storage";
+import type { AuthSession } from "@/types/auth";
+import type { ReactNode } from "react";
 
 interface AuthGuardProps {
   children: ReactNode;
 }
 
+const AuthSessionContext = createContext<AuthSession | null>(null);
+
 export function AuthGuard({ children }: AuthGuardProps) {
   const router = useRouter();
   const [isCheckingSession, setIsCheckingSession] = useState(true);
-  const [hasSession, setHasSession] = useState(false);
+  const [session, setSession] = useState<AuthSession | null>(null);
 
   useEffect(() => {
-    const session = getAuthSession();
+    const currentSession = getAuthSession();
 
-    if (!session) {
+    if (!currentSession) {
       router.replace("/entrar");
       return;
     }
 
-    setHasSession(true);
+    setSession(currentSession);
     setIsCheckingSession(false);
   }, [router]);
 
@@ -30,9 +39,23 @@ export function AuthGuard({ children }: AuthGuardProps) {
     return <AuthenticatedPageSkeleton />;
   }
 
-  if (!hasSession) {
+  if (!session) {
     return null;
   }
 
-  return children;
+  return (
+    <AuthSessionContext.Provider value={session}>
+      {children}
+    </AuthSessionContext.Provider>
+  );
+}
+
+export function useAuthSession() {
+  const session = useContext(AuthSessionContext);
+
+  if (!session) {
+    throw new Error("useAuthSession deve ser usado dentro de AuthGuard");
+  }
+
+  return session;
 }
