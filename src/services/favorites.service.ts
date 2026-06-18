@@ -1,6 +1,5 @@
-import { API_URL } from "@/config/env";
 import { request } from "@/services/http";
-import type { FavoriteWord } from "@/types/word";
+import type { FavoriteWord } from "@/types/favorite";
 
 export async function getFavorites(userId: string): Promise<FavoriteWord[]> {
   return request<FavoriteWord[]>(
@@ -18,11 +17,7 @@ export async function addFavorite(
 }
 
 export async function removeFavorite(id: string): Promise<void> {
-  const response = await fetch(`${API_URL}/favorites/${id}`, {
+  await request<void>(`/favorites/${id}`, {
     method: "DELETE",
   });
-
-  if (!response.ok) {
-    throw new Error("Não foi possível remover o favorito");
-  }
 }
