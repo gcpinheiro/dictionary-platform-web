@@ -23,6 +23,7 @@ export function BuscaPalavras({ userId }: BuscaPalavrasProps) {
   const [history, setHistory] = useState<SearchHistoryItem[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
+  const [selectedWord, setSelectedWord] = useState("");
   const [searchError, setSearchError] = useState("");
   const [historyError, setHistoryError] = useState("");
   const debouncedTerm = useDebounce(term, 400);
@@ -83,6 +84,12 @@ export function BuscaPalavras({ userId }: BuscaPalavrasProps) {
   }, [debouncedTerm, shouldSearch]);
 
   async function handleSelectWord(word: string) {
+    if (selectedWord) {
+      return;
+    }
+
+    setSelectedWord(word);
+
     try {
       const historyItem = await addSearchHistory(userId, word);
       setHistory((currentHistory) => [
@@ -147,7 +154,12 @@ export function BuscaPalavras({ userId }: BuscaPalavrasProps) {
         ) : null}
 
         {results.length ? (
-          <ListaResultados results={results} onSelectWord={handleSelectWord} />
+          <ListaResultados
+            isSelecting={Boolean(selectedWord)}
+            onSelectWord={handleSelectWord}
+            results={results}
+            selectedWord={selectedWord}
+          />
         ) : null}
       </section>
 
