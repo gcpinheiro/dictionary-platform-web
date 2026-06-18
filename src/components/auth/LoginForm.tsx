@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { SyntheticEvent, useEffect, useState } from "react";
 import { z } from "zod";
 import { AuthLayout } from "@/components/auth/AuthLayout";
+import { useToast } from "@/components/ui/ToastProvider";
 import { isAuthenticated, saveAuthSession } from "@/lib/auth-storage";
 import { loginUser } from "@/services/auth.service";
 
@@ -24,10 +25,9 @@ const initialValues: LoginFormValues = {
 
 export function LoginForm() {
   const router = useRouter();
+  const { showToast } = useToast();
   const [values, setValues] = useState<LoginFormValues>(initialValues);
   const [errors, setErrors] = useState<LoginFormErrors>({});
-  const [formError, setFormError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -46,7 +46,6 @@ export function LoginForm() {
       ...currentErrors,
       [field]: undefined,
     }));
-    setFormError("");
   }
 
   async function handleSubmit(event: SyntheticEvent<HTMLFormElement>) {
@@ -70,24 +69,27 @@ export function LoginForm() {
     }
 
     setIsSubmitting(true);
-    setFormError("");
-    setSuccessMessage("");
 
     try {
       const session = await loginUser(result.data);
 
       saveAuthSession(session);
-      setSuccessMessage("Login realizado com sucesso.");
+      showToast({
+        type: "success",
+        message: "Login realizado com sucesso.",
+      });
 
       setTimeout(() => {
         router.push("/");
       }, 600);
     } catch (error) {
-      setFormError(
-        error instanceof Error
-          ? error.message
-          : "Não foi possível entrar na sua conta. Tente novamente.",
-      );
+      showToast({
+        type: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Não foi possível entrar na sua conta. Tente novamente.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -184,18 +186,6 @@ export function LoginForm() {
               </p>
             ) : null}
           </div>
-
-          {formError ? (
-            <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-[#DC2626]">
-              {formError}
-            </p>
-          ) : null}
-
-          {successMessage ? (
-            <p className="rounded-xl bg-green-50 px-4 py-3 text-sm text-[#16A34A]">
-              {successMessage}
-            </p>
-          ) : null}
 
           <button
             className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-4 text-base font-semibold text-white shadow-sm transition hover:bg-[#1D4ED8] focus:outline-none focus:ring-4 focus:ring-[#DBEAFE] disabled:cursor-not-allowed disabled:opacity-70"

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { SyntheticEvent, useEffect, useState } from "react";
 import { z } from "zod";
 import { AuthLayout } from "@/components/auth/AuthLayout";
+import { useToast } from "@/components/ui/ToastProvider";
 import { isAuthenticated, saveAuthSession } from "@/lib/auth-storage";
 import { registerUser } from "@/services/auth.service";
 
@@ -35,10 +36,9 @@ const initialValues: RegisterFormValues = {
 
 export function RegisterForm() {
   const router = useRouter();
+  const { showToast } = useToast();
   const [values, setValues] = useState<RegisterFormValues>(initialValues);
   const [errors, setErrors] = useState<RegisterFormErrors>({});
-  const [formError, setFormError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
@@ -76,7 +76,6 @@ export function RegisterForm() {
           ? "As senhas não conferem"
           : undefined,
     }));
-    setFormError("");
   }
 
   async function handleSubmit(event: SyntheticEvent<HTMLFormElement>) {
@@ -100,8 +99,6 @@ export function RegisterForm() {
     }
 
     setIsSubmitting(true);
-    setFormError("");
-    setSuccessMessage("");
 
     try {
       const session = await registerUser({
@@ -111,17 +108,22 @@ export function RegisterForm() {
       });
 
       saveAuthSession(session);
-      setSuccessMessage("Conta criada com sucesso.");
+      showToast({
+        type: "success",
+        message: "Conta criada com sucesso.",
+      });
 
       setTimeout(() => {
         router.push("/");
       }, 600);
     } catch (error) {
-      setFormError(
-        error instanceof Error
-          ? error.message
-          : "Não foi possível criar sua conta. Tente novamente.",
-      );
+      showToast({
+        type: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Não foi possível criar sua conta. Tente novamente.",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -303,18 +305,6 @@ export function RegisterForm() {
               </p>
             ) : null}
           </div>
-
-          {formError ? (
-            <p className="rounded-xl bg-red-50 px-4 py-3 text-sm text-[#DC2626]">
-              {formError}
-            </p>
-          ) : null}
-
-          {successMessage ? (
-            <p className="rounded-xl bg-green-50 px-4 py-3 text-sm text-[#16A34A]">
-              {successMessage}
-            </p>
-          ) : null}
 
           <button
             className="flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#2563EB] px-4 text-base font-semibold text-white shadow-sm transition hover:bg-[#1D4ED8] focus:outline-none focus:ring-4 focus:ring-[#DBEAFE] disabled:cursor-not-allowed disabled:opacity-70"

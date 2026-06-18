@@ -3,6 +3,7 @@
 import { Heart } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/Skeleton";
+import { useToast } from "@/components/ui/ToastProvider";
 import { getAuthSession } from "@/lib/auth-storage";
 import {
   addFavorite,
@@ -17,11 +18,11 @@ interface FavoriteButtonProps {
 }
 
 export function FavoriteButton({ word, wordId }: FavoriteButtonProps) {
+  const { showToast } = useToast();
   const [favorite, setFavorite] = useState<FavoriteWord | null>(null);
   const [userId, setUserId] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [feedback, setFeedback] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -57,14 +58,16 @@ export function FavoriteButton({ word, wordId }: FavoriteButtonProps) {
     }
 
     setIsUpdating(true);
-    setFeedback("");
     setError("");
 
     try {
       if (favorite) {
         await removeFavorite(favorite.id);
         setFavorite(null);
-        setFeedback("Palavra removida dos favoritos.");
+        showToast({
+          type: "success",
+          message: "Palavra removida dos favoritos.",
+        });
         return;
       }
 
@@ -75,9 +78,15 @@ export function FavoriteButton({ word, wordId }: FavoriteButtonProps) {
       });
 
       setFavorite(newFavorite);
-      setFeedback("Palavra adicionada aos favoritos.");
+      showToast({
+        type: "success",
+        message: "Palavra adicionada aos favoritos.",
+      });
     } catch {
-      setError("Não foi possível atualizar o favorito. Tente novamente.");
+      showToast({
+        type: "error",
+        message: "Não foi possível atualizar o favorito. Tente novamente.",
+      });
     } finally {
       setIsUpdating(false);
     }
@@ -100,10 +109,6 @@ export function FavoriteButton({ word, wordId }: FavoriteButtonProps) {
       </button>
 
       {isLoading ? <Skeleton className="h-4 w-40" /> : null}
-
-      {feedback ? (
-        <p className="text-sm font-medium text-[#16A34A]">{feedback}</p>
-      ) : null}
 
       {error ? <p className="text-sm font-medium text-[#DC2626]">{error}</p> : null}
     </div>

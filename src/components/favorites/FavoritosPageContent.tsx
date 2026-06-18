@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { FavoriteListSkeleton } from "@/components/ui/Skeletons";
+import { useToast } from "@/components/ui/ToastProvider";
 import { getAuthSession } from "@/lib/auth-storage";
 import { getFavorites, removeFavorite } from "@/services/favorites.service";
 import type { FavoriteWord } from "@/types/favorite";
@@ -11,10 +12,10 @@ import { ListaFavoritos } from "./ListaFavoritos";
 import { ModalConfirmacaoRemocao } from "./ModalConfirmacaoRemocao";
 
 export function FavoritosPageContent() {
+  const { showToast } = useToast();
   const [favorites, setFavorites] = useState<FavoriteWord[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-  const [feedback, setFeedback] = useState("");
   const [removingId, setRemovingId] = useState("");
   const [favoriteToRemove, setFavoriteToRemove] =
     useState<FavoriteWord | null>(null);
@@ -49,7 +50,6 @@ export function FavoritosPageContent() {
     const favorite = favoriteToRemove;
 
     setRemovingId(favorite.id);
-    setFeedback("");
     setError("");
 
     try {
@@ -57,10 +57,16 @@ export function FavoritosPageContent() {
       setFavorites((currentFavorites) =>
         currentFavorites.filter((item) => item.id !== favorite.id),
       );
-      setFeedback(`${favorite.word} foi removida dos favoritos.`);
+      showToast({
+        type: "success",
+        message: `${favorite.word} foi removida dos favoritos.`,
+      });
       setFavoriteToRemove(null);
     } catch {
-      setError("Não foi possível remover o favorito. Tente novamente.");
+      showToast({
+        type: "error",
+        message: "Não foi possível remover o favorito. Tente novamente.",
+      });
     } finally {
       setRemovingId("");
     }
@@ -98,12 +104,6 @@ export function FavoritosPageContent() {
           {error ? (
             <section className="rounded-2xl border border-red-100 bg-red-50 p-6">
               <p className="text-sm text-[#DC2626]">{error}</p>
-            </section>
-          ) : null}
-
-          {feedback ? (
-            <section className="mb-4 rounded-2xl border border-green-100 bg-green-50 p-4">
-              <p className="text-sm text-[#16A34A]">{feedback}</p>
             </section>
           ) : null}
 
