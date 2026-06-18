@@ -1,0 +1,17 @@
+
+> dictionary-platform-web@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.5.19
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.6:3000
+
+ ✓ Starting...
+ ✓ Ready in 4.5s
+ ○ Compiling /palavras/[palavra] ...
+ GET / 200 in 10887ms
+ GET /palavras/storage 200 in 11760ms
+ GET /dicionario 200 in 1050ms
+ GET /favicon.ico 200 in 1224ms
+ GET /favicon.ico 200 in 16ms
+[?25h

@@ -274,6 +274,12 @@
       "userId": "1",
       "wordId": "energy",
       "word": "energy"
+    },
+    {
+      "userId": "3kyA_Rq",
+      "wordId": "storage",
+      "word": "storage",
+      "id": "MPDdiu_"
     }
   ],
   "history": [
@@ -288,6 +294,18 @@
       "word": "storage",
       "createdAt": "2026-06-18T01:51:01.883Z",
       "id": "Igad6k8"
+    },
+    {
+      "userId": "3kyA_Rq",
+      "word": "storage",
+      "createdAt": "2026-06-18T01:58:55.961Z",
+      "id": "zBC3Fq4"
+    },
+    {
+      "userId": "3kyA_Rq",
+      "word": "storage",
+      "createdAt": "2026-06-18T01:58:58.911Z",
+      "id": "g8BFm_u"
     }
   ]
 }
